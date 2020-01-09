@@ -1,0 +1,11 @@
+{
+  "name": "sushi-backend",
+  "version": "1.0.0",
+  "description": "sushi app backend in express, connecting to MongoDB Atlas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Levente Toth",
+  "license": "ISC"
+}
