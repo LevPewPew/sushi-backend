@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 require('dotenv').config();
 
 const app = express();
@@ -18,6 +19,7 @@ mongoose.connect(DB_URL, dbConfig, (err) => {
   }
 });
 
+app.use(morgan('dev'));
 app.use(express.json());
 // connect with index.js file in routes directory
 app.use(require('./routes/index'));
