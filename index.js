@@ -23,7 +23,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 // TODO modify this to use a .env and deploy in heroku with added .env var (also modify my steps notes if this is possible)
 app.use(cors({
-  origin: 'http://localhost:3000'
+  // origin: 'http://localhost:3000';
+  origin: 'https://sushi-dev-portal.netlify.com'
 }));
 // connect with index.js file in routes directory
 app.use(require('./routes/index'));
