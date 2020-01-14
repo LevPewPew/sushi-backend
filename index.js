@@ -11,6 +11,17 @@ const PORT = process.env.PORT || 5000;
 const DB_URL = process.env.DB_URL;
 const dbConfig = { useNewUrlParser: true, useUnifiedTopology: true };
 
+const whitelist = ['http://localhost:3000', 'https://sushi-dev-portal.netlify.com'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
 mongoose.connect(DB_URL, dbConfig, (err) => {
   if(err) {
     console.log("MongooseDB Connection Error");
@@ -21,12 +32,7 @@ mongoose.connect(DB_URL, dbConfig, (err) => {
 
 app.use(morgan('dev'));
 app.use(express.json());
-// TODO modify this to use a .env and deploy in heroku with added .env var (also modify my steps notes if this is possible)
-app.use(cors({
-  // origin: 'http://localhost:3000';
-  origin: 'https://sushi-dev-portal.netlify.com'
-}));
-// connect with index.js file in routes directory
+app.use(cors({corsOptions}));
 app.use(require('./routes/index'));
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
